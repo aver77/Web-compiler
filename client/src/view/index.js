@@ -11,15 +11,18 @@ import { useWithLocalStorages } from "hooks/useWithLocalStorages";
 import { CURRENT_SERVER_ANSWER } from "constants/specificWords";
 
 const View = ({ localizationHandler }) => {
-    const serverAnswer = useWithLocalStorages(CURRENT_SERVER_ANSWER);
+    const {
+        variable: serverAnswer,
+        variableHandler: setServerAnswer
+    } = useWithLocalStorages(CURRENT_SERVER_ANSWER);
 
     return (
         <WithThemeProvider>
             <CssBaseline />
             <Header localizationHandler={localizationHandler} />
             <Input />
-            <Controls serverAnswerHandler={serverAnswer.variableHandler} />
-            <Input serverAnswer={serverAnswer.variable} />
+            <Controls serverAnswerHandler={setServerAnswer} />
+            <Input serverAnswer={serverAnswer} />
             <Footer />
         </WithThemeProvider>
     );

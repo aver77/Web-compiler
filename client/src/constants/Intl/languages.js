@@ -1,5 +1,7 @@
 import { LOCALES } from "./locales";
 
+const currentYear = new Date().getFullYear();
+
 export const languages = {
     [LOCALES.ENGLISH]: {
         ru: "Ru",
@@ -10,7 +12,7 @@ export const languages = {
         programmingLanguages: "Available languages:",
         btnText: "Run",
         outputPlaceholder: "Compiler answer...",
-        footerText: "© 2022 NW Project | All Rights Reserved",
+        footerText: `© ${currentYear} NW Project | All Rights Reserved`,
     },
     [LOCALES.RUSSIAN]: {
         ru: "Рус",
@@ -21,6 +23,6 @@ export const languages = {
         programmingLanguages: "Доступные языки:",
         btnText: "Запуск",
         outputPlaceholder: "Ответ компилятора...",
-        footerText: "© 2022 NW Project | Все права защищены",
+        footerText: `© ${currentYear} NW Project | Все права защищены`,
     },
 };
