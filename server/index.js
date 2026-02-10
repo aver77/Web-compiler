@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 
-const { generateFile } = require("./generations/generateFile");
-const { executeCpp } = require("./executions/executeCpp");
+const { generateFile, generationDirectory } = require("./generations");
+const { executeCpp, cppOutputDirectory } = require("./executions/executeCpp");
 const { executePy } = require("./executions/executePy");
 const { executeJs } = require("./executions/executeJs");
+const { clearDirectories } = require("./shared/utils");
 
 const app = express();
 
@@ -45,5 +46,7 @@ app.post("/code", async (req, res) => {
         return res.json({ filepath, output });
     } catch {
         return res.json({ output: "Compile code error" });
+    } finally {
+        clearDirectories([ generationDirectory, cppOutputDirectory ]);
     }
 });

@@ -2,16 +2,16 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuid } = require("uuid");
 
-const dirCodes = path.join(__dirname, "codes");
+const generationDirectory = path.join(__dirname, "codes");
 
-if (!fs.existsSync(dirCodes)) {
-    fs.mkdirSync(dirCodes, { recursive: true });
+if (!fs.existsSync(generationDirectory)) {
+    fs.mkdirSync(generationDirectory, { recursive: true });
 }
 
 const generateFile = async (format, code) => {
     const jobId = uuid();
     const filename = `${jobId}.${format}`;
-    const filepath = path.join(dirCodes, filename);
+    const filepath = path.join(generationDirectory, filename);
 
     await fs.writeFileSync(filepath, code);
     return filepath;
@@ -19,4 +19,5 @@ const generateFile = async (format, code) => {
 
 module.exports = {
     generateFile,
+    generationDirectory
 };
