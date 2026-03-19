@@ -7,7 +7,7 @@ import { resultContainerStyles, alignStyles } from "./styles";
 import { DEFAULT_RESULT_ROWS } from "constants/inputValues";
 import { ternaryOperation } from "utils/ternaryOperation";
 
-const Result = ({ serverAnswer }) => {
+const CodeResult = ({ serverAnswer }) => {
     const label = <FormattedMessage id="outputPlaceholder" />;
 
     return (
@@ -36,4 +36,4 @@ const Result = ({ serverAnswer }) => {
     );
 };
 
-export default memo(Result);
+export default memo(CodeResult);

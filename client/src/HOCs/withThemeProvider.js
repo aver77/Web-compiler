@@ -5,6 +5,7 @@ import { darkTheme } from "../styles/darkTheme";
 import { lightTheme } from "../styles/lightTheme";
 
 import { SWITCH_THEMES } from "../constants/specificWords";
+import { LIGHT_THEME_NAME, DARK_THEME_NAME } from "../constants/theme";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
@@ -21,12 +22,15 @@ const WithThemeProvider = ({ children }) => {
         setCurrentTheme(bool);
     };
 
+    const theme = ternaryOperation(!currentTheme, lightTheme, darkTheme);
+    const themeName = ternaryOperation(!currentTheme, LIGHT_THEME_NAME, DARK_THEME_NAME);
+
     return (
         <ThemeProvider
-            theme={ternaryOperation(!currentTheme, lightTheme, darkTheme)}
+            theme={theme}
         >
             {Children.map(children, child => {
-                return React.cloneElement(child, { currentThemeHandler });
+                return React.cloneElement(child, { currentThemeName: themeName, currentThemeHandler });
             })}
         </ThemeProvider>
     );

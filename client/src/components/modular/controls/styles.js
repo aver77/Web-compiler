@@ -6,9 +6,6 @@ export const controlsStyles = theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    [theme.breakpoints.down("sm")]: {
-        marginTop: marginSmall,
-    },
 });
 
 export const selectionBoxStyles = theme => ({

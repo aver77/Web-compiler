@@ -2,7 +2,7 @@ import React from "react";
 import { CssBaseline } from "@mui/material";
 
 import Header from "../components/common/header";
-import Input from "components/modular/inputs";
+import { CodeEditor, CodeResult } from "components/modular/code";
 import Controls from "../components/modular/controls";
 import Footer from "../components/common/footer";
 
@@ -20,9 +20,9 @@ const View = ({ localizationHandler }) => {
         <WithThemeProvider>
             <CssBaseline />
             <Header localizationHandler={localizationHandler} />
-            <Input />
+            <CodeEditor />
             <Controls serverAnswerHandler={setServerAnswer} />
-            <Input serverAnswer={serverAnswer} />
+            <CodeResult serverAnswer={serverAnswer} />
             <Footer />
         </WithThemeProvider>
     );
