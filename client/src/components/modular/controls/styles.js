@@ -1,6 +1,4 @@
-import { marginSmall } from "constants/breakpointsValues";
-
-export const controlsStyles = theme => ({
+export const controlsStyles = () => ({
     flexGrow: 1,
     marginTop: "30px",
     display: "flex",

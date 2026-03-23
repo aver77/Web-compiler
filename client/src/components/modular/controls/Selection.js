@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
 import { Select, FormControl, MenuItem, InputLabel, Box } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 
@@ -8,18 +8,26 @@ import {
     paperStyles,
 } from "./styles";
 import { fontBreakPoints } from "utils/breakpoints";
-import { useWithLocalStorages } from "hooks/useWithLocalStorages";
-import { CURRENT_PROGRAMMING_LANGUAGE } from "constants/specificWords";
+import { useProgrammingLanguageContext } from "providers/programmingLanguageProvider";
+import { CPP, JAVASCRIPT, PYTHON } from "constants/programmingLanguages";
 
 const Selection = () => {
-    const selectionValue = useWithLocalStorages(CURRENT_PROGRAMMING_LANGUAGE);
+    const { programmingLanguage, changeProgrammingLanguage } = useProgrammingLanguageContext();
 
-    const handleSelectionValue = useCallback(
-        e => {
-            selectionValue.variableHandler(e.target.value);
+    const selectionItems = [
+        {
+            label: "Javascript",
+            value: JAVASCRIPT
         },
-        [selectionValue]
-    );
+        {
+            label: "C++",
+            value: CPP
+        },
+        {
+            label: "Python",
+            value: PYTHON
+        }
+    ]
 
     return (
         <Box sx={selectionBoxStyles}>
@@ -33,9 +41,9 @@ const Selection = () => {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={selectionValue.variable}
+                    value={programmingLanguage}
                     label={<FormattedMessage id="programmingLanguages" />}
-                    onChange={handleSelectionValue}
+                    onChange={(e) => changeProgrammingLanguage(e.target.value)}
                     size="small"
                     sx={fontBreakPoints}
                     MenuProps={{
@@ -44,15 +52,11 @@ const Selection = () => {
                         },
                     }}
                 >
-                    <MenuItem sx={fontBreakPoints} value="js">
-                        Javascript
-                    </MenuItem>
-                    <MenuItem sx={fontBreakPoints} value="cpp">
-                        C++
-                    </MenuItem>
-                    <MenuItem sx={fontBreakPoints} value="py">
-                        Python
-                    </MenuItem>
+                    {selectionItems.map(({ label, value }) => (
+                        <MenuItem key={label} sx={fontBreakPoints} value={value}>
+                            {label}
+                        </MenuItem>
+                    ))}
                 </Select>
             </FormControl>
         </Box>

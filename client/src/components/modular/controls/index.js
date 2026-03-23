@@ -6,27 +6,26 @@ import Selection from "./Selection";
 import { controlsStyles } from "./styles";
 import { fontBreakPoints } from "utils/breakpoints";
 import { getLocalStorageItem } from "utils/localStorage";
-import {
-    CURRENT_CODE,
-    CURRENT_PROGRAMMING_LANGUAGE,
-} from "constants/specificWords";
+import { CODE } from "constants/localStorageKeys";
 
 import Service from "service";
+import { useProgrammingLanguageContext } from "providers/programmingLanguageProvider";
+import { useServerAnswerContext } from "providers/serverAnswerProvider";
 
-const Controls = ({ serverAnswerHandler }) => {
+const Controls = () => {
+    const { programmingLanguage } = useProgrammingLanguageContext();
+    const { changeServerAnswer } = useServerAnswerContext();
+
     const handleClick = useCallback(() => {
-        const currentCode = getLocalStorageItem(CURRENT_CODE);
-        const currentLanguage = getLocalStorageItem(
-            CURRENT_PROGRAMMING_LANGUAGE
-        );
-        if (currentCode && currentLanguage) {
+        const currentCode = getLocalStorageItem(CODE);
+        if (currentCode && programmingLanguage) {
             new Service()
-                .compileResourse(currentLanguage, currentCode)
+                .compileResourse(programmingLanguage, currentCode)
                 .then(data => {
-                    serverAnswerHandler(data);
+                    changeServerAnswer(data);
                 });
         }
-    }, [serverAnswerHandler]);
+    }, [programmingLanguage, changeServerAnswer]);
 
     return (
         <Container maxWidth="xxl">

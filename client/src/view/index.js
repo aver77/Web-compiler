@@ -6,25 +6,16 @@ import { CodeEditor, CodeResult } from "components/modular/code";
 import Controls from "../components/modular/controls";
 import Footer from "../components/common/footer";
 
-import WithThemeProvider from "HOCs/withThemeProvider";
-import { useWithLocalStorages } from "hooks/useWithLocalStorages";
-import { CURRENT_SERVER_ANSWER } from "constants/specificWords";
-
-const View = ({ localizationHandler }) => {
-    const {
-        variable: serverAnswer,
-        variableHandler: setServerAnswer
-    } = useWithLocalStorages(CURRENT_SERVER_ANSWER);
-
+const View = () => {
     return (
-        <WithThemeProvider>
+        <>
             <CssBaseline />
-            <Header localizationHandler={localizationHandler} />
+            <Header />
             <CodeEditor />
-            <Controls serverAnswerHandler={setServerAnswer} />
-            <CodeResult serverAnswer={serverAnswer} />
+            <Controls />
+            <CodeResult />
             <Footer />
-        </WithThemeProvider>
+        </>
     );
 };
 

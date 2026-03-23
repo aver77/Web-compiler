@@ -1,12 +1,21 @@
 import React from "react";
 import View from "view";
-import WithIntl from "HOCs/withIntl";
+import { IntlLocalizationContextProvider } from "providers/intlLocalizationProvider";
+import { ProgrammingLanguageContextProvider } from "providers/programmingLanguageProvider";
+import { ThemeContextProvider } from "providers/themeProvider";
+import { ServerAnswerContextProvider } from "../../providers/serverAnswerProvider";
 
 const App = () => {
     return (
-        <WithIntl>
-            <View />
-        </WithIntl>
+        <ServerAnswerContextProvider>
+            <IntlLocalizationContextProvider>
+                <ProgrammingLanguageContextProvider>
+                    <ThemeContextProvider>
+                        <View />
+                    </ThemeContextProvider>
+                </ProgrammingLanguageContextProvider>
+            </IntlLocalizationContextProvider>
+        </ServerAnswerContextProvider>
     );
 };
 

@@ -5,9 +5,11 @@ import { FormattedMessage } from "react-intl";
 import { resultContainerStyles, alignStyles } from "./styles";
 
 import { DEFAULT_RESULT_ROWS } from "constants/inputValues";
-import { ternaryOperation } from "utils/ternaryOperation";
+import { useServerAnswerContext } from "providers/serverAnswerProvider";
 
-const CodeResult = ({ serverAnswer }) => {
+const CodeResult = () => {
+    const { serverAnswer } = useServerAnswerContext();
+
     const label = <FormattedMessage id="outputPlaceholder" />;
 
     return (
@@ -19,17 +21,13 @@ const CodeResult = ({ serverAnswer }) => {
                         disableUnderline: true,
                     }}
                     id="outlined-multiline-static"
-                    label={ternaryOperation(serverAnswer, undefined, label)}
+                    label={serverAnswer ? undefined : label}
                     multiline
                     rows={DEFAULT_RESULT_ROWS}
                     fullWidth
                     variant="outlined"
                     color="primary"
-                    value={ternaryOperation(
-                        serverAnswer,
-                        serverAnswer,
-                        undefined
-                    )}
+                    value={serverAnswer || undefined}
                 />
             </Box>
         </Container>

@@ -4,23 +4,24 @@ import { useIntl} from "react-intl";
 import { defineMonacoThemes } from "./defineMonacoTheme"
 
 import { codeContainerStyles, codeWrapperStyles } from "./styles";
-import { useWithLocalStorages } from "hooks/useWithLocalStorages";
-import { CURRENT_CODE } from "constants/specificWords";
-import { ternaryOperation } from "utils/ternaryOperation";
+import { CODE } from "constants/localStorageKeys";
+import {getLocalStorageItem, setLocalStorageItem} from "utils/localStorage";
+import { useProgrammingLanguageContext } from "providers/programmingLanguageProvider";
+import { useThemeContext } from "providers/themeProvider";
 
 import Editor from '@monaco-editor/react';
+import { JAVASCRIPT, PROGRAMMING_LANGUAGE_TO_MONACO_MAPPING } from "constants/programmingLanguages";
 
-const CodeEditor = ({ currentThemeName }) => {
+const CodeEditor = () => {
     const intl = useIntl();
 
-    const codeValue = useWithLocalStorages(CURRENT_CODE);
+    const { language } = useProgrammingLanguageContext();
+    const { theme } = useThemeContext();
+
+    const initialCodeValue = getLocalStorageItem(CODE);
 
     const handleTextField = v => {
-        if (v) {
-            codeValue.variableHandler(v);
-        } else {
-            codeValue.variableHandler(null);
-        }
+        setLocalStorageItem(CODE, v)
     };
 
     const handleEditorDidMount = (editor) => {
@@ -36,17 +37,14 @@ const CodeEditor = ({ currentThemeName }) => {
             <Box sx={codeWrapperStyles}>
                 <Editor
                     height="60vh"
-                    defaultLanguage="javascript"
+                    defaultLanguage={PROGRAMMING_LANGUAGE_TO_MONACO_MAPPING[JAVASCRIPT]}
+                    language={PROGRAMMING_LANGUAGE_TO_MONACO_MAPPING[language]}
                     defaultValue={`// ${intl.formatMessage({ id: "inputPlaceholder" })}`}
-                    theme={currentThemeName}
+                    theme={theme}
                     onChange={handleTextField}
                     beforeMount={handleEditorWillMount}
                     onMount={handleEditorDidMount}
-                    value={ternaryOperation(
-                        codeValue.variable,
-                        codeValue.variable,
-                        undefined
-                    )}
+                    value={initialCodeValue}
                 />
             </Box>
         </Container>
