@@ -1,11 +1,10 @@
 import React, { memo } from "react";
 import { TextField, Box, Container } from "@mui/material";
 import { FormattedMessage } from "react-intl";
-
+import { useServerAnswerContext } from "providers/serverAnswerProvider";
 import { resultContainerStyles, alignStyles } from "./styles";
 
-import { DEFAULT_RESULT_ROWS } from "constants/inputValues";
-import { useServerAnswerContext } from "providers/serverAnswerProvider";
+const DEFAULT_RESULT_ROWS = 6;
 
 const CodeResult = () => {
     const { serverAnswer } = useServerAnswerContext();

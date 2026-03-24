@@ -3,11 +3,12 @@ import { Box, Container } from "@mui/material";
 import { useIntl} from "react-intl";
 import { defineMonacoThemes } from "./defineMonacoTheme"
 
-import { codeContainerStyles, codeWrapperStyles } from "./styles";
 import { CODE } from "constants/localStorageKeys";
 import {getLocalStorageItem, setLocalStorageItem} from "utils/localStorage";
 import { useProgrammingLanguageContext } from "providers/programmingLanguageProvider";
 import { useThemeContext } from "providers/themeProvider";
+
+import { codeContainerStyles, codeWrapperStyles } from "./styles";
 
 import Editor from '@monaco-editor/react';
 import { JAVASCRIPT, PROGRAMMING_LANGUAGE_TO_MONACO_MAPPING } from "constants/programmingLanguages";

@@ -11,7 +11,6 @@ import { LightMode, ModeNight } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { FormattedMessage } from "react-intl";
 
-import { headerBoxStyles, headerStackStyles } from "./styles";
 import {
     fontBreakPoints,
     headerBreakPoints,
@@ -19,6 +18,8 @@ import {
 } from "utils/breakpoints";
 import { ThemeSwitch } from "./ThemeSwitch";
 import { LanguageSwitch } from "./LanguageSwitch";
+
+import { headerBoxStyles, headerStackStyles } from "./styles";
 
 const Header = () => {
     const theme = useTheme();

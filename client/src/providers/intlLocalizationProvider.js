@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useState } from "react";
 
 import { IntlProvider as ReactIntlProvider } from "react-intl";
-import { LOCALES } from "../constants/Intl/locales";
-import { languages } from "../constants/Intl/languages";
+import { LOCALES } from "constants/Intl/locales";
+import { languages } from "constants/Intl/languages";
 
-import { LANGUAGE } from "../constants/localStorageKeys";
+import { LANGUAGE } from "constants/localStorageKeys";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
-} from "../utils/localStorage";
+} from "utils/localStorage";
 
 const IntlLocalizationContext = createContext(null);
 

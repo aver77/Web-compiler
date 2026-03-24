@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { darkTheme } from "../styles/darkTheme";
-import { lightTheme } from "../styles/lightTheme";
+import { darkTheme } from "styles/darkTheme";
+import { lightTheme } from "styles/lightTheme";
 
 import { THEME } from "constants/localStorageKeys";
 import { LIGHT_THEME_NAME, DARK_THEME_NAME } from "constants/theme";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
-} from "../utils/localStorage";
+} from "utils/localStorage";
 
 const ThemeContext = createContext(null);
 

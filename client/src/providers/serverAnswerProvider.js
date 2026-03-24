@@ -4,7 +4,7 @@ import { SERVER_ANSWER } from "constants/localStorageKeys";
 import {
     getLocalStorageItem,
     setLocalStorageItem,
-} from "../utils/localStorage";
+} from "utils/localStorage";
 
 const ServerAnswerContext = createContext(null);
 
